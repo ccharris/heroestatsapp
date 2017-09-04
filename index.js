@@ -4,7 +4,11 @@ const axios = require('axios')
 const heroprotocol = require('heroprotocoljs')
 
 app.get('/', (req, res) => {
-  axios.get("http://hotsapi.s3-website-eu-west-1.amazonaws.com/bedd6561-068f-f0d0-f261-482c4d5c2c50.StormReplay")
+  axios.get("http://hotsapi.s3-website-eu-west-1.amazonaws.com/bedd6561-068f-f0d0-f261-482c4d5c2c50.StormReplay", {
+      params: {
+         'x-amz-request-payer': 'requester'
+      }
+  })
   .then(function (response) {
     console.log(response);
     const file = response;
