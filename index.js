@@ -4,26 +4,37 @@ const store = require('./store')
 const app = express()
 
 app.use(bodyParser.json())
-app.get('/getHeroDailyStat', (req, res) => {
+app.get('/heroDailyStat', (req, res) => {
   store
     .getHeroDailyStat({
       hero: req.body.hero,
       date: req.body.date,
       gameType: req.body.gameType
     })
-    .then(() => res.sendStatus(200))
+    .then((heroesStats) => {
+      res.status(200).json(heroesStats);
+    })
 })
-app.post('/createHeroDailyStat', (req, res) => {
+app.get('/getAllHeroesStats', (req, res) => {
+  store
+    .getAllHeroesStats()
+    .then((heroesStats) => {
+      res.status(200).json(heroesStats);
+    })
+})
+app.post('/heroDailyStat', (req, res) => {
   store
     .createHeroDailyStat({
-      hero: hero,
-      date: date,
-      numWins: wins,
-      numGames: games,
-      gameType: gameType,
-      winRate: winRate
+      hero: req.body.hero,
+      date: req.body.date,
+      wins: req.body.wins,
+      games: req.body.games,
+      gameType: req.body.gameType,
+      winRate: req.body.winRate
     })
-    .then(() => res.sendStatus(200))
+    .then((heroesStats) => {
+      res.status(200).json(heroesStats);
+    })
 })
 
-app.listen(3001, () => console.log('Server running on port 3001'))
+app.listen(3001, () => console.log('Server running on port 3000'))
