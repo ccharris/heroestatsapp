@@ -1,29 +1,29 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+const store = require('./store')
 const app = express()
-const axios = require('axios')
-const heroprotocol = require('heroprotocoljs')
 
-app.get('/', (req, res) => {
-    axios({
-  method:'get',
-  url:'http://hotsapi.s3-website-eu-west-1.amazonaws.com/b4f11f3f-618d-c202-ac45-6dac304920ce.StormReplay',
-  headers: {
-         'x-amz-request-payer': 'requester'
-      }
+app.use(bodyParser.json())
+app.get('/getHeroDailyStat', (req, res) => {
+  store
+    .getHeroDailyStat({
+      hero: req.body.hero,
+      date: req.body.date,
+      gameType: req.body.gameType
+    })
+    .then(() => res.sendStatus(200))
 })
-  .then(function (response) {
-    console.log(response.data);
-    const file = response;
-    const details = heroprotocol.get(heroprotocol.DETAILS, file);
-    console.log(details);
-
-    res.send(response.data);
-  })
-  .catch(function (error) {
-    console.log(error);
-    res.send(error);
-  });
-
-  
+app.post('/createHeroDailyStat', (req, res) => {
+  store
+    .createHeroDailyStat({
+      hero: hero,
+      date: date,
+      numWins: wins,
+      numGames: games,
+      gameType: gameType,
+      winRate: winRate
+    })
+    .then(() => res.sendStatus(200))
 })
-app.listen(3000, () => console.log('Server running on port 3001'))
+
+app.listen(3001, () => console.log('Server running on port 3001'))

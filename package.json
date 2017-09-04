@@ -19,8 +19,11 @@
   },
   "homepage": "https://github.com/ccharris/heroestatsapp#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
-    "heroprotocoljs": "^0.2.1"
+    "heroprotocoljs": "^0.2.1",
+    "knex": "^0.13.0",
+    "mysql": "^2.14.1"
   },
   "devDependencies": {
     "axios": "^0.16.2",
