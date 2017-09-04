@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "axios": "^0.16.2",
+    "cors": "^2.8.4",
     "moment": "^2.18.1",
     "pm2": "^2.6.1"
   }

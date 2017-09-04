@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const store = require('./store')
+const cors = require('cors')
 const app = express()
 const axios = require('axios');
 const moment = require('moment');
@@ -8,7 +9,8 @@ const moment = require('moment');
 const heroes = ['Abathur', 'Alarak', "Anub'arak", 'Artanis', 'Arthas', 'Auriel', 'Azmodan', 'Brightwing', 'Cassia', 'Chen', 'Cho', 'Chromie', 'D.Va', 'Dehaka', 'Diablo', 'E.T.C.', 'Falstad', 'Gall', 'Garrosh', 'Gazlowe', 'Genji', 'Greymane', "Gul'dan", 'Illidan', 'Jaina', 'Johanna', "Kael'thas", 'Kerrigan', 'Kharazim', 'Leoric', 'Li Li', 'Li-Ming', 'Lúcio', 'Lunara', 'Malfurion', 'Malthael', 'Medivh', 'Muradin', 'Murky', 'Nazeebo', 'Nova', 'Probius', 'Ragnaros', 'Raynor', 'Rehgar', 'Rexxar', 'Samuro', 'Sgt. Hammer', 'Sonya', 'Stitches', 'Stukov', 'Sylvanas', 'Tassadar', 'The Butcher', 'The Lost Vikings', 'Thrall', 'Tracer', 'Tychus', 'Tyrael', 'Tyrande', 'Uther', 'Valeera', 'Valla', 'Varian', 'Xul', 'Zagara', 'Zarya', 'Zeratul', "Zul'jin", ];
 const gameModes = ['QuickMatch', 'TeamLeague', 'HeroLeague'];
 
-app.use(bodyParser.json())
+
+app.use(cors())
 app.get('/heroDailyStat', (req, res) => {
   store
     .getHeroDailyStat({
@@ -36,7 +38,7 @@ app.post('/heroDailyStat', (req, res) => {
         axios.get('http://hotsapi.net/api/v1/replays', {
             params: {   
                 start_date: day,
-                end_date: moment(new Date())
+                end_date: moment(day).add(1, 'days')
             }
         })
         .then(function (response) {
