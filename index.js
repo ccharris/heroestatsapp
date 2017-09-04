@@ -12,12 +12,12 @@ app.get('/', (req, res) => {
       }
 })
   .then(function (response) {
-    console.log(response);
+    console.log(response.data);
     const file = response;
     const details = heroprotocol.get(heroprotocol.DETAILS, file);
     console.log(details);
 
-    res.send(response);
+    res.send(response.data);
   })
   .catch(function (error) {
     console.log(error);
