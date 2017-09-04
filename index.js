@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
     const details = heroprotocol.get(heroprotocol.DETAILS, file);
     console.log(details);
 
-    res.send(details);
+    res.send(response);
   })
   .catch(function (error) {
     console.log(error);
