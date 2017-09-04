@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
   })
   .catch(function (error) {
     console.log(error);
-    res.send('hey, error!');
+    res.send(error);
   });
 
   
